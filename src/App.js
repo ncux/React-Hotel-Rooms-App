@@ -9,8 +9,11 @@ import Room from './pages/room';
 import Error from './pages/error';
 
 function App() {
+
   return (
+
     <div className="App">
+
       <Navbar />
       <Switch>
         <Route path="/" exact component={ Home }/>

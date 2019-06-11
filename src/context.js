@@ -6,7 +6,6 @@ const RoomContext = React.createContext();
 
 const RoomConsumer = RoomContext.Consumer;
 
-
 class RoomProvider extends Component {
 
     state = {
@@ -19,23 +18,24 @@ class RoomProvider extends Component {
     componentDidMount() {
         let rooms = this.formatData(items);
         console.log(rooms);
+        let featuredRooms = rooms.filter(room => room.featured == true);
+        this.setState({ rooms, sortedRooms: rooms, featuredRooms, loading: false });
     }
 
     formatData(shit) {
-        let items = shit.map(item => {
+        return shit.map(item => {
             let id = item.sys.id;
             let images = item.fields.images.map(image => image.fields.file.url);
             let room = { ...item.fields, images, id };
             return room;
-        })
-        return items;
+        });
+        // return items;
     }
 
     render() {
         return (
             <RoomContext.Provider value={ {...this.state} } >
                 { this.props.children }
-
             </RoomContext.Provider>
         )
     }
